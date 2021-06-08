@@ -1,3 +1,5 @@
+import cardTpl from '../src/partials/card-template.hbs';
+import menuCards from '../menu.json';
 import './sass/main.scss';
 
 const Theme = {
@@ -38,4 +40,13 @@ function makeSavedTheme() {
     themeSwitcher.checked = true;
     makeDarkTheme();
   }
+}
+
+const menu = document.querySelector('ul.js-menu');
+const menuMarkup = makeMenuMarkup(menuCards);
+menu.insertAdjacentHTML('beforeend', menuMarkup);
+
+function makeMenuMarkup(menuCards) {
+  // return menuCards.map(cardTpl).join('');
+  return cardTpl(menuCards);
 }
