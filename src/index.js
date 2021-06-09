@@ -14,18 +14,26 @@ themeSwitcher.addEventListener('change', switchTheme);
 
 makeSavedTheme();
 
+// function switchTheme(e) {
+//   if (e.target.checked) {
+//     makeDarkTheme();
+//   } else {
+//     makeLightTheme();
+//   }
+// }
+
 function switchTheme(e) {
   if (e.target.checked) {
-    makeDarkTheme();
+    replaceTheme(Theme.LIGHT, Theme.DARK);
   } else {
-    makeLightTheme();
+    replaceTheme(Theme.DARK, Theme.LIGHT);
   }
 }
 
-// function replaceTheme(oldTheme, newTheme) {
-//   document.body.classList.replace(oldTheme, newTheme);
-//   localStorage.setItem(THEME_KEY, newTheme);
-// }
+function replaceTheme(oldTheme, newTheme) {
+  document.body.classList.replace(oldTheme, newTheme);
+  localStorage.setItem(THEME_KEY, newTheme);
+}
 
 function makeLightTheme() {
   document.body.classList.add(Theme.LIGHT);
@@ -44,6 +52,8 @@ function makeSavedTheme() {
   if (savedTheme === Theme.DARK) {
     themeSwitcher.checked = true;
     makeDarkTheme();
+  } else {
+    makeLightTheme();
   }
 }
 
