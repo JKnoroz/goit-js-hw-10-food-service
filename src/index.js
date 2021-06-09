@@ -31,37 +31,33 @@ function switchTheme(e) {
 }
 
 function replaceTheme(oldTheme, newTheme) {
-  document.body.classList.replace(oldTheme, newTheme);
+  document.body.classList.add(newTheme);
+  document.body.classList.remove(oldTheme);
   localStorage.setItem(THEME_KEY, newTheme);
 }
 
-function makeLightTheme() {
-  document.body.classList.add(Theme.LIGHT);
-  document.body.classList.remove(Theme.DARK);
-  localStorage.setItem(THEME_KEY, Theme.LIGHT);
-}
+// function makeLightTheme() {
+//   document.body.classList.add(Theme.LIGHT);
+//   document.body.classList.remove(Theme.DARK);
+//   localStorage.setItem(THEME_KEY, Theme.LIGHT);
+// }
 
-function makeDarkTheme() {
-  document.body.classList.add(Theme.DARK);
-  document.body.classList.remove(Theme.LIGHT);
-  localStorage.setItem(THEME_KEY, Theme.DARK);
-}
+// function makeDarkTheme() {
+//   document.body.classList.add(Theme.DARK);
+//   document.body.classList.remove(Theme.LIGHT);
+//   localStorage.setItem(THEME_KEY, Theme.DARK);
+// }
 
 function makeSavedTheme() {
   const savedTheme = localStorage.getItem(THEME_KEY);
   if (savedTheme === Theme.DARK) {
     themeSwitcher.checked = true;
-    makeDarkTheme();
+    replaceTheme(Theme.LIGHT, Theme.DARK);
   } else {
-    makeLightTheme();
+    replaceTheme(Theme.DARK, Theme.LIGHT);
   }
 }
 
 const menu = document.querySelector('ul.js-menu');
-const menuMarkup = makeMenuMarkup(menuCards);
+const menuMarkup = cardTpl(menuCards);
 menu.insertAdjacentHTML('beforeend', menuMarkup);
-
-function makeMenuMarkup(menuCards) {
-  // return menuCards.map(cardTpl).join('');
-  return cardTpl(menuCards);
-}
